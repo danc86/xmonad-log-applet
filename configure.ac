@@ -8,7 +8,7 @@ AC_HEADER_STDC
 
 PKG_CHECK_MODULES([GLIB], [glib-2.0 >= 2.20.0])
 PKG_CHECK_MODULES([DBUS_GLIB], [dbus-glib-1 >= 0.80])
-PKG_CHECK_MODULES([LIBPANEL], [libpanelapplet-2.0 >= 2.26.0])
+PKG_CHECK_MODULES([LIBXFCE4PANEL], [libxfce4panel-1.0 >= 4.6.0])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

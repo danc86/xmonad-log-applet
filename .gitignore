@@ -5,5 +5,5 @@ config.log
 config.status
 configure
 xmonad-log-applet
-xmonad-log-applet.server
+xmonad-log-applet.desktop
 .*.swp

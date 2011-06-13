@@ -2,11 +2,12 @@
  * See LICENSE for licensing information
  */
 #include <string.h>
-#include <panel-applet.h>
+#include <libxfce4panel/xfce-panel-plugin.h>
 #include <gtk/gtklabel.h>
 #include <dbus/dbus-glib.h>
 #include <stdlib.h>
 
+#if 0 /* GNOME */
 /* AW: I pulled this code off the interwebs. It makes background 
  * transparency actually work */
 void change_bg(PanelApplet *applet, PanelAppletBackgroundType type,
@@ -39,6 +40,7 @@ void change_bg(PanelApplet *applet, PanelAppletBackgroundType type,
       break;
   }
 }
+#endif /* GNOME */
 
 static void signal_handler(DBusGProxy *obj, const char *msg, GtkWidget *widget)
 {
@@ -68,40 +70,19 @@ static void set_up_dbus_transfer(GtkWidget *buf)
                               buf, NULL);
 }
 
-static gboolean xmonadlog_applet_fill(PanelApplet *applet)
+static void xmonadlog_applet_fill(GtkContainer *container)
 {
   GtkWidget *label = gtk_label_new("Waiting for XMonad");
 
   gtk_label_set_use_markup(GTK_LABEL(label), TRUE);
   set_up_dbus_transfer(label);
-  g_signal_connect(applet, "change-background", G_CALLBACK(change_bg), NULL);
-  gtk_container_add(GTK_CONTAINER(applet), label);
-  gtk_widget_show_all(GTK_WIDGET(applet));
-
-  return TRUE;
+  gtk_container_add(container, label);
 }
 
-
-static gboolean xmonadlog_applet_factory(PanelApplet *applet,
-                                         const gchar *iid,
-                                         gpointer data)
-{
-  gboolean retval = FALSE;
-
-  if(!strcmp(iid, "OAFIID:XMonadLogApplet"))
-    retval = xmonadlog_applet_fill(applet);
-
-  if(retval == FALSE) {
-    printf("Wrong applet!\n");
-    exit(-1);
-  }
-
-  return retval;
+static void xmonadlog_applet_construct(XfcePanelPlugin *plugin) {
+    xmonadlog_applet_fill(GTK_CONTAINER(plugin));
+    xfce_panel_plugin_set_expand(plugin, TRUE);
+    gtk_widget_show_all(GTK_WIDGET(plugin));
 }
 
-PANEL_APPLET_BONOBO_FACTORY("OAFIID:XMonadLogApplet_Factory",
-                            PANEL_TYPE_APPLET,
-                            "XMonadLogApplet",
-                            "0.0.1",
-                            xmonadlog_applet_factory,
-                            NULL);
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(xmonadlog_applet_construct);

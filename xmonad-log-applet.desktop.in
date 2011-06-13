@@ -1,0 +1,8 @@
+[Xfce Panel]
+Type=X-XFCE-PanelPlugin
+Name=XMonad Log Monitor
+Comment=Monitor your XMonad's log
+Icon=@DATAROOTDIR@/icons/hicolor/48x48/apps/xmonad48.png
+X-XFCE-Exec=@LIBEXECDIR@/xfce4/panel-plugins/xmonad-log-applet
+X-XFCE-Unique=false
+X-XFCE-Internal=false
