@@ -1,11 +1,11 @@
 Name:		xmonad-log-applet
-Version:	1.0.0
+Version:	1.1.0
 Release:	1%{?dist}
 Summary:	A little applet that grabs logging output from Xmonad
 
 Group:		User Interface/X
 License:	BSD
-URL:		http://uhsure.com/xmonad-log-applet.html
+URL:		https://github.com/danc86/xmonad-log-applet
 Source0:	xmonad-log-applet.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -58,5 +58,8 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Jun 14 2011 Dan Callaghan <djc@djc.id.au> - 1.1.0-1
+- Ported to XFCE
+
 * Mon Aug 15 2010 Adam Wick <awick@uhsure.com> - 1.0.0-1
 - Initial spec file

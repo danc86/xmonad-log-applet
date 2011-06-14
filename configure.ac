@@ -1,4 +1,5 @@
-AC_INIT([XMonad Log Applet], [1.0.0], [awick@uhsure.com], [xmonad-log-applet])
+AC_INIT([XMonad Log Applet], [1.1.0], [djc@djc.id.au], [xmonad-log-applet],
+    [https://github.com/danc86/xmonad-log-applet])
 
 AC_PREFIX_DEFAULT([/usr])
 AC_PROG_CC
