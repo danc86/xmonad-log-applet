@@ -4,16 +4,20 @@ Release:	1%{?dist}
 Summary:	A little applet that grabs logging output from Xmonad
 
 Group:		User Interface/X
-License:	BSD3
+License:	BSD
 URL:		http://uhsure.com/xmonad-log-applet.html
 Source0:	xmonad-log-applet.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
-BuildRequires:	coreutils,gcc,sed,pkgconfig,glib2-devel,dbus-glib-devel,gnome-panel-devel
-Requires:	glib2,dbus-glib,gnome-panel
+BuildRequires:  gcc
+BuildRequires:  sed
+BuildRequires:  pkgconfig
+BuildRequires:  glib2-devel
+BuildRequires:  dbus-glib-devel
+BuildRequires:  xfce4-panel-devel
 
 %description
-
+XFCE panel plugin to display XMonad log messages, received over DBus.
 
 %prep
 %setup -q
@@ -32,13 +36,24 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+
+%postun
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 %defattr(-,root,root,-)
-%{_libdir}/gnome-applets/xmonad-log-applet
-%{_libdir}/bonobo/servers/xmonad-log-applet.server
-%{_datadir}/icons/hicolor/48x48/apps
-%doc
+%{_libexecdir}/xfce4/panel-plugins/%{name}
+%{_datadir}/xfce4/panel-plugins/%{name}.desktop
+%{_datadir}/icons/hicolor/48x48/apps/xmonad48.png
+%doc LICENSE README.md
 
 
 
