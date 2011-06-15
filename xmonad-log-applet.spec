@@ -53,7 +53,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_libexecdir}/xfce4/panel-plugins/%{name}
 %{_datadir}/xfce4/panel-plugins/%{name}.desktop
 %{_datadir}/icons/hicolor/48x48/apps/xmonad48.png
-%doc LICENSE README.md
+%doc LICENSE README.md xmonad.hs.example
 
 
 
