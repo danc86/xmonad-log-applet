@@ -16,7 +16,8 @@ main = do
 
 getWellKnownName :: Client -> IO ()
 getWellKnownName dbusClient = runDBus dbusClient $ do
-    requestName (mkBusName_ (B.pack "org.xmonad.Log")) [AllowReplacement, DoNotQueue]
+    requestName (mkBusName_ (B.pack "org.xmonad.Log"))
+        [AllowReplacement, ReplaceExisting, DoNotQueue]
         (\e -> error "xmonad: Failed to acquire name org.xmonad.Log")
         (\response -> return ())
 
